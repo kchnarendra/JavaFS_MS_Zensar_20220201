@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,15 @@ import com.narendra.entity.Post;
 import com.narendra.exception.PostIdNotAvailableException;
 import com.narendra.services.PostService;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/posts")
+@Tag(name = "It is Post Controller")
+@CrossOrigin("*")
+//@CrossOrigin("http://localhost:4200")
 public class PostController {
 
 	@Autowired
@@ -52,7 +60,8 @@ public class PostController {
 
 	// @RequestMapping(value = "/api/posts/{postId}",method = RequestMethod.GET)
 	@GetMapping(value = "/{postId}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public Post getPostByPostId(@PathVariable("postId") int id) {
+	public @ApiResponse(description = "It returns Post object with given id") Post getPostByPostId(
+			@Parameter(description = "You have to enter postId") @PathVariable("postId") int id) {
 		return postService.getPostByPostId(id);
 	}
 

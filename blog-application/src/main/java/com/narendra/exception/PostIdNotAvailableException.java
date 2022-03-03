@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class PostIdNotAvailableException extends RuntimeException {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String message;
 	
 
@@ -23,6 +27,5 @@ public class PostIdNotAvailableException extends RuntimeException {
 	public String toString() {
 		return "PostIdNotAvailableException [message=" + message + "]";
 	}
-	
 	
 }
